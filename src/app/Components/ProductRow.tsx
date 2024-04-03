@@ -1,10 +1,11 @@
 'use client'
 
 import { IProduct } from '@/app/Models/ProductModel'
-import { BiInfoCircle, BiSolidTrash } from 'react-icons/bi'
+import { BiInfoCircle, BiSolidTrash, BiCartAdd } from 'react-icons/bi'
 import { deleteProduct } from '@/app/Helpers/Products'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import {useShoppingCartStore} from '@/stores/shoppingcart'
 
 interface ProductRowProps {
   product: IProduct
@@ -16,16 +17,18 @@ const ProductRow: React.FC<ProductRowProps> = ({
   removeOptimisticProduct,
 }) => {
   const router = useRouter()
-  const handleViewProduct = (product_id) => {
+  const handleViewProduct = (product_id:number) => {
     router.push(`/products/${product_id}`)
   }
 
-  const handleDeleteProduct = async (product_id) => {
+  const handleDeleteProduct = async (product_id:number) => {
     removeOptimisticProduct(product_id)
 
     // Directus: Product Delete
     await deleteProduct(product_id)
   }
+
+  const {addProduct:handleAddToCart} = useShoppingCartStore()
 
   return (
     <tr key={product.id}>
@@ -45,8 +48,14 @@ const ProductRow: React.FC<ProductRowProps> = ({
           <button
             className='btn btn-outline btn-info'
             onClick={() => handleViewProduct(product.id)}
-          >
+            >
             <BiInfoCircle size='2rem' />
+          </button>
+          <button
+            className='btn btn-outline btn-info'
+            onClick={() => handleAddToCart(product)}
+            >
+            <BiCartAdd size='2rem' />
           </button>
         </div>
       </td>

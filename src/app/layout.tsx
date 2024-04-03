@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { AddProductButton } from '@/app/Components/AddProductButton'
+import { CartIndicator } from './Components/CartIndicator'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -47,10 +48,12 @@ export default function RootLayout({
             </a>
           </div>
           <div className='navbar-end'>
-            <AddProductButton className='mt-10' name='New Product' />
+            {/* <AddProductButton name='New Product' /> */}
+            <CartIndicator />
           </div>
         </div>
         {children}
+        <footer className='mt-20 h-20 bg-slate-800'></footer>
       </body>
     </html>
   )
