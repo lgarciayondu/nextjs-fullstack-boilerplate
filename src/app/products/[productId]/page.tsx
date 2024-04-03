@@ -1,5 +1,6 @@
 import { HomeButton } from '@/app/Components/HomeButton'
 import { getProduct } from '@/app/Helpers/Products'
+import { IProduct } from '@/app/Models/ProductModel'
 
 interface ProductViewProps {
   params: {
@@ -53,7 +54,7 @@ const ProductView = async ({ params }: ProductViewProps) => {
         </div>
 
         <div className='mb-4 col-span-2'>
-          <HomeButton />
+          <HomeButton name={'Home'} />
         </div>
       </div>
     </main>
