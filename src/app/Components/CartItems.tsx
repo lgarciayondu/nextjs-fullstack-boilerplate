@@ -92,7 +92,7 @@ export default function CartItems () {
       ))}
       <hr className='border-gray-600' />
       <div className='text-right text-lg text-white mt-8'>
-        Total: {items.reduce((acc, { product, quantity }) => acc + product.price * quantity, 0)}
+        Total: {currencyFormat(items.reduce((acc, { product, quantity }) => acc + product.price * quantity, 0))}
       </div>
       <div className='flex gap-4 mt-8 justify-end'>
         <button
